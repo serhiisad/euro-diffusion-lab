@@ -1,7 +1,5 @@
 import City from "./city";
 import Country from "./country";
-// const City = require('./city')
-// const Country = require('./country'
 
 class MapDict {
   constructor() {

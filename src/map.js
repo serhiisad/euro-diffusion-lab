@@ -21,7 +21,6 @@ class MapDict {
 }
 
 export default class CountryMap {
-  // countriesGrid = new MapDict();
 
   constructor(countries) {
     this.countriesGrid = new MapDict();
@@ -75,16 +74,16 @@ export default class CountryMap {
         };
 
         if (x < this.maxX) {
-          addNeighbor(x + 1, y); // right neighbor
+          addNeighbor(x + 1, y); 
         }
         if (x > this.minY) {
-          addNeighbor(x - 1, y); // left neighbor
+          addNeighbor(x - 1, y);
         }
         if (y < this.maxY) {
-          addNeighbor(x, y + 1); // up neighbor
+          addNeighbor(x, y + 1); 
         }
         if (y > this.minY) {
-          addNeighbor(x, y - 1); // down neighbor
+          addNeighbor(x, y - 1);
         }
 
         if (this.countries.length > 1 && !neighbors.length) {

@@ -1,6 +1,0 @@
-import
-
-export default class Validation {
-
-  static ()
-}

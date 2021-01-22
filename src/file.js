@@ -20,7 +20,7 @@ export default class FileParser {
       const countryNumber = parseInt(currentLine);
       if (countryNumber) {
         //TODO
-        lineIndex += 1; // move to first country line
+        lineIndex += 1;
         const countries = [];
         for (
           let countryLineIndex = lineIndex;
@@ -29,7 +29,7 @@ export default class FileParser {
         ) {
           countries.push(lines[countryLineIndex]);
         }
-        lineIndex += countryNumber; // move to next number of countries
+        lineIndex += countryNumber;
         countryStrings.push(countries);
       } else {
         throw new Error(
@@ -39,7 +39,7 @@ export default class FileParser {
     }
 
     if (lines[lines.length - 1] !== "0") {
-      throw new Error("Input file must end with '0' line");
+      throw new Error("INPUT FILE MUST END WITH a ZERO line");
     }
 
     return countryStrings;

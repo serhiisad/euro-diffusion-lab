@@ -10,7 +10,6 @@ export default class FileParser {
       .readFileSync(filename)
       .toString()
       .split("\n")
-
       .map((line) => line.replace("\r", ""));
 
     let lineIndex = 0;
@@ -19,7 +18,6 @@ export default class FileParser {
       const currentLine = lines[lineIndex];
       const countryNumber = parseInt(currentLine);
       if (countryNumber) {
-        //TODO
         lineIndex += 1;
         const countries = [];
         for (
@@ -37,7 +35,6 @@ export default class FileParser {
         );
       }
     }
-
     if (lines[lines.length - 1] !== "0") {
       throw new Error("INPUT FILE MUST END WITH a ZERO line");
     }

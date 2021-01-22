@@ -21,7 +21,6 @@ class MapDict {
 }
 
 export default class CountryMap {
-
   constructor(countries) {
     this.countriesGrid = new MapDict();
     this.countries = countries;
@@ -74,13 +73,13 @@ export default class CountryMap {
         };
 
         if (x < this.maxX) {
-          addNeighbor(x + 1, y); 
+          addNeighbor(x + 1, y);
         }
         if (x > this.minY) {
           addNeighbor(x - 1, y);
         }
         if (y < this.maxY) {
-          addNeighbor(x, y + 1); 
+          addNeighbor(x, y + 1);
         }
         if (y > this.minY) {
           addNeighbor(x, y - 1);
@@ -95,7 +94,6 @@ export default class CountryMap {
     }
   }
 
-  //diffusion
   diffuse() {
     this.countriesGrid = new MapDict();
     const result = new Map();
@@ -122,7 +120,6 @@ export default class CountryMap {
       currentDay += 1;
     } while (!this.isCompleted());
 
-    // check if result have all countries
     this.countries.forEach((country) => {
       if (!result.has(country.name)) {
         result.set(country.name, currentDay);

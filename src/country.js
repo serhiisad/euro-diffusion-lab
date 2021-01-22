@@ -1,27 +1,23 @@
-import { isInteger } from "lodash";
-import City from "./city";
 import { countryConstants } from "./constants";
 
-//country coords
-
 export default class Country {
-
   constructor(name, coords) {
-    if (!Country.areCoordinatesValid(coords)) {
-      throw new Error("Coordinates are invalid");
+    if (!Country.areCoordsValid(coords)) {
+      throw new Error(`INVALID COORDINATES OF COUNTRY: ${name}`);
     }
     if (name.length > countryConstants.NAME_MAX_LENGTH) {
       throw new Error(
-        `Name must be less than ${countryConstants.NAME_MAX_LENGTH} characters`
+        `NAME MUST CONTAIN LESS THAT ${countryConstants.NAME_MAX_LENGTH} SYMBOLS`
       );
     }
+    //validateCountry(this);
 
     this.cities = [];
     this.name = name;
     this.coords = coords;
   }
 
-  static areCoordinatesValid({ xl, yl, xh, yh }) {
+  static areCoordsValid({ xl, yl, xh, yh }) {
     const isCorrectLowHighRange = (low, high) => low <= high;
 
     const isIntegerInBounds = (coord) => {
@@ -33,13 +29,10 @@ export default class Country {
     };
 
     return [
-      isIntegerInBounds(xl),
-      isIntegerInBounds(yl),
-      isIntegerInBounds(xh),
-      isIntegerInBounds(yh),
+      [xl, yl, xh, yh].every((coord) => isIntegerInBounds(coord)),
       isCorrectLowHighRange(xl, xh),
       isCorrectLowHighRange(yl, yh),
-    ].every((result) => result === true);
+    ].every((result) => result);
   }
 
   addCity(city) {
@@ -50,6 +43,7 @@ export default class Country {
     return this.cities.every((city) => city.isCompleted());
   }
 
+  //todo refactor
   static parseCountryString(countryString) {
     const [name, ...coords] = countryString.split(" ");
     const [xl, yl, xh, yh] = coords.map((coord) => parseInt(coord));

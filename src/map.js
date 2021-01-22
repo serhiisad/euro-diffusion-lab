@@ -1,11 +1,9 @@
 import City from "./city";
-import Country from "./country";
 
 class MapDict {
   constructor() {
     this.map = new Map();
   }
-  // map = new Map();
 
   key(coords) {
     return `${coords.x}-${coords.y}`;

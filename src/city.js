@@ -4,39 +4,34 @@ export default class City {
   constructor(
     coinTypes,
     countryName,
-    initCoinsCount = coinConstants.INIT_COINS,
-    reprPortion = coinConstants.REPR_PORTION
+    initCoinsCount = coinConstants.INIT_COINS
   ) {
-    this.coinTypes = coinTypes;
     this.countryName = countryName;
-    this.neighbors = [];
+    this.coinTypes = coinTypes;
     this.coins = new Array(coinTypes.length).fill(0);
-    this.cache = new Array(coinTypes.length).fill(0);
-
-    const countryIndex = this.coinTypes.indexOf(this.countryName);
-
-    this.coins[countryIndex] = initCoinsCount;
-    this.reprPortion = reprPortion;
-  }
-
-  shareCoins() {
-    this.coins.forEach((coinAmount, index) => {
-      const share = Math.floor(coinAmount * this.reprPortion);
-      this.neighbors.forEach((city) => {
-        city.cache[index] += share;
-        this.coins[index] -= share;
-      });
-    });
+    this.income = new Array(coinTypes.length).fill(0);
+    this.neighbors = [];
+    this.coins[this.coinTypes.indexOf(this.countryName)] = initCoinsCount;
   }
 
   isCompleted() {
     return this.coins.every((coin) => coin > 0);
   }
 
-  updateCoinBalance() {
-    this.coinTypes.forEach((type, typeIndex) => {
-      this.coins[typeIndex] += this.cache[typeIndex];
-      this.cache[typeIndex] = 0;
+  shareCoins() {
+    this.coins.forEach((coinAmount, index) => {
+      const share = Math.floor(coinAmount * coinConstants.REPR_PORTION);
+      this.neighbors.forEach((city) => {
+        city.income[index] += share;
+        this.coins[index] -= share;
+      });
     });
+  }
+
+  updateCoinBalance() {
+    for (let typeIdx = 0; typeIdx < this.coinTypes.length; typeIdx++) {
+      this.coins[typeIdx] += this.income[typeIdx];
+      this.income[typeIdx] = 0;
+    }
   }
 }

@@ -7,10 +7,9 @@ const calculateCase = function (countryStrings) {
     const countries = countryStrings.map((cStr) =>
       Country.parseCountryString(cStr)
     );
-    const result = new CountryMap(countries).diffuse();
-    return result;
+    return new CountryMap(countries).diffuse();
   } catch (err) {
-    console.log("ERROR calculating case: ", err);
+    console.log("ERROR: ", err);
   }
 };
 

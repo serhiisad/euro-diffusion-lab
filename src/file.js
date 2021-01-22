@@ -1,24 +1,25 @@
-// import fs from "fs";
-const fs = require("fs");
+import fs from "fs";
 
-// export default class FileParser {
-class FileParser {
+export default class FileParser {
   static parseInputFile(filename) {
     if (!filename) {
-      throw new Error("Filename is required");
+      throw new Error("Filename is missing");
     }
     const countryStrings = [];
     const lines = fs
       .readFileSync(filename)
       .toString()
       .split("\n")
+
       .map((line) => line.replace("\r", ""));
 
     let lineIndex = 0;
+
     while (lineIndex < lines.length - 2) {
       const currentLine = lines[lineIndex];
       const countryNumber = parseInt(currentLine);
       if (countryNumber) {
+        //TODO
         lineIndex += 1; // move to first country line
         const countries = [];
         for (
@@ -32,7 +33,7 @@ class FileParser {
         countryStrings.push(countries);
       } else {
         throw new Error(
-          `Error in input file at '${lines[lineIndex]}'. Expected a number of countries`
+          `INPUT ERROR in LINE '${lines[lineIndex]}'. NUMBER OF COUNTRIES IS EXPECTED`
         );
       }
     }
@@ -44,5 +45,3 @@ class FileParser {
     return countryStrings;
   }
 }
-
-module.exports = FileParser;
